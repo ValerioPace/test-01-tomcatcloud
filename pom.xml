@@ -30,6 +30,7 @@
             <resource>
               <!-- this is relative to the pom.xml directory -->
               <directory>src</directory>
+			  <targetPath>WEB-INF/classes</targetPath>
             </resource>
           </webResources>
           
