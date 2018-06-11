@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -23,11 +24,13 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import it.gov.mef.cloudify.ServiceController;
 import it.gov.mef.cloudify.model.Ente;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @EnableTransactionManagement
+@ComponentScan(basePackageClasses = ServiceController.class)
 @EntityScan(basePackageClasses = Ente.class)
 public class NoiPAServletInitializer extends SpringBootServletInitializer {
  
