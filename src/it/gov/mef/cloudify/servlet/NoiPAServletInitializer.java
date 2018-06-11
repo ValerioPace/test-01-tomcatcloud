@@ -1,8 +1,11 @@
 package it.gov.mef.cloudify.servlet;
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -10,6 +13,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -26,6 +30,14 @@ public class NoiPAServletInitializer extends SpringBootServletInitializer {
     
     @Value("${spring.datasource.driver-class}")
     private String driverClass;
+    
+    @Bean
+    public static PropertyPlaceholderConfigurer ppc() throws IOException {
+        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+        ppc.setLocations(new ClassPathResource("application.properties"));
+        ppc.setIgnoreUnresolvablePlaceholders(true);
+        return ppc;
+    }
     
     @Primary
     @Bean(destroyMethod = "", name="dataSource")
