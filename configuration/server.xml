@@ -133,12 +133,20 @@
         <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
         -->
 
+		<!--
         <Valve className="org.apache.catalina.valves.RemoteIpValve" remoteIpHeader="X-Forwarded-For" protocolHeader="X-Forwarded-Proto"/>
-
+        -->
         <!-- ##ACCESS_LOG_VALVE## -->
  
         <Valve className="org.apache.catalina.valves.ErrorReportValve" showReport="false"
                showServerInfo="false" />
+			   
+		<!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%{X-Forwarded-For}i %l %u %t %r %s %b" />
 
       </Host>
     </Engine>
