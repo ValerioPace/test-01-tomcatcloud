@@ -6,8 +6,18 @@ rm -rf /opt/webserver/webapps/manager
 
 echo "Remove manager app and start the server.."
 
-echo "$JWS_HOME/bin/launch.sh"
+echo "adding access valve log"
 
+accessvalvelog="<Valve className=\"org.apache.catalina.valves.AccessLogValve\" directory=\"logs\" \
+            prefix=\"localhost_access_log.\" suffix=\".txt\" \
+            pattern=\"%{X-Forwarded-For}i %l %u %t %r %s %b\" /> \
+			</Host>"
+			
+sed -i "s|</Host>|$accessvalvelog|" $JWS_HOME/conf/server.xml
+
+echo "access valve log added"
+
+echo "$JWS_HOME/bin/launch.sh"
 exec $JWS_HOME/bin/launch.sh
 
 echo "End customization"
