@@ -6,6 +6,8 @@ rm -rf /opt/webserver/webapps/manager
 
 echo "Remove manager app and start the server.."
 
-/opt/webserver/bin/launch.sh
+echo "$JWS_HOME/bin/launch.sh"
+
+exec $JWS_HOME/bin/launch.sh
 
 echo "End customization"
